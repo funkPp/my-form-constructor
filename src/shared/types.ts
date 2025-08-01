@@ -10,4 +10,5 @@ export interface IEnumObj {
   name: string;
   key: string;
   value: IData[keyof IData];
+  valueCurrent: string;
 }

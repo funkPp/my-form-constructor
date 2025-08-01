@@ -1,19 +1,18 @@
-import { useState } from "react";
 import { Card } from "./ui/Card";
 import fetchJson from "./shared/api";
 import type { IData, IEnumObj } from "./shared/types";
+import { Form } from "./ui/Form";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   const data: IData = fetchJson();
-  enumeration(data);
+  const enumArray = enumeration(data);
 
   return (
     <div className="bg-[#282c34] min-h-[100vh] flex flex-col items-center justify-center ">
       <Card typeClass="main">
-        <div>dddddd</div>
+        <Form data={enumArray} />
       </Card>
+      <div className="max-w-sm"></div>
     </div>
   );
 }
@@ -25,18 +24,15 @@ function enumeration(data: IData) {
   for (const key in data) {
     const value = data[key as keyof IData];
     if (Array.isArray(value)) {
-      // console.log(`Array Ключ: ${key}, Значение: ${value}`);
-      enumArray.push({ name: "select", key, value });
+      enumArray.push({ name: "select", key, value, valueCurrent: value[0] });
     }
     if (typeof value === "boolean") {
-      // console.log(`Boolean Ключ: ${key}, Значение: ${value}`);
-      enumArray.push({ name: "checkbox", key, value });
+      enumArray.push({ name: "checkbox", key, value, valueCurrent: "" });
     }
     if (typeof value === "string" || typeof value === "number") {
-      // console.log(`String/number Ключ: ${key}, Значение: ${value}`);
-      enumArray.push({ name: "input", key, value });
+      enumArray.push({ name: "input", key, value, valueCurrent: "" });
     }
   }
-  console.log(enumArray);
+
   return enumArray;
 }

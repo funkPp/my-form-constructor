@@ -8,7 +8,7 @@ export function Card({
   children: ReactNode;
 }) {
   const clasees: { [index: string]: string } = {
-    main: `max-w-sm mx-auto bg-gray-100 m-3 p-3 border border-gray-200 rounded-sm shadow`,
+    main: `w-sm mx-auto bg-gray-200 m-2 p-2 border border-gray-200 rounded-sm shadow`,
   };
 
   return <div className={clasees[typeClass]}>{children}</div>;
